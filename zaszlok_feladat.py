@@ -1,5 +1,6 @@
 #a kapott színt jelelő karaktert visszaadja színként ami megfelelő az svg-be
 def szinAtalakit(szin):
+    szin = szin.upper()
     if szin == 'F':
         return 'white'
     elif szin == 'P':
@@ -19,13 +20,13 @@ def szinAtalakit(szin):
 
 
 def main():
-    file = open("demo_zaszlo.txt", "r")
+    file = open("zaszlo.txt", "r")
 
     kockameret = 100 #az svg kockáinak a méretének a beállítása
 
     #svg fájl kezdeti adatainak megadása
     svg = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>'
-    svg += f'\n<svg width="{kockameret*(len(file.readline()))}" height="{kockameret*(len(file.readlines())+1)}" xmlns="http://www.w3.org/2000/svg">'
+    svg += f'\n<svg width="{kockameret*(len(file.readline())-1)}" height="{kockameret*(len(file.readlines())+1)}" xmlns="http://www.w3.org/2000/svg">'
 
     file.seek(0) #a stream alaphelyzetbe való állítása
 
@@ -42,7 +43,10 @@ def main():
     svg += '\n</svg>'
 
     #svg file létrehozáse
-    file = open("eredmeny.svg","w",encoding="UTF-8")
+    file = open("zaszlo.svg","w",encoding="UTF-8")
     file.write(svg)
+    file.close()
+    print("Az svg fájl létrehozva!")
+    
 
 main()
